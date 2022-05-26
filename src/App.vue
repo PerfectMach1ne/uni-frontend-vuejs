@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <!-- html, vue, vuetify here -->
     <v-main>
       <router-view/>
     </v-main>

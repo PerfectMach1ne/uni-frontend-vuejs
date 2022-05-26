@@ -1,15 +1,25 @@
 <template>
   <v-container>
-    <v-row class="text-left">
-      <ul>
-        <li v-for="(todo, id) in todos" :key="todo.id"> {{ id }}, {{ todo.title }} </li>
-      </ul>
-    </v-row>
+    <v-card
+      class="mx-auto"
+      elevation="7"
+      outlined
+      tile
+    >
+      <template v-for="(user, id) in users">
+        <p v-bind:key="id">{{ user.name }} {{ user.email }}</p>
+      </template>
+      <!-- <ul>
+        <li v-for="(user, id) in users" v-bind:key="id">
+          {{ user.name }} {{ user.email }}
+        </li>
+      </ul> -->
+    </v-card>
   </v-container>
 </template>
 
 <script>
-const axios = require('axios').default;  
+const axios = require('axios').default;
 
 // JSONPlaceHolder URLs
 const url_users = "https://jsonplaceholder.typicode.com/users";
@@ -26,7 +36,9 @@ export default {
     }
   },
   methods: {
-    
+    getTodos() {
+      return this.todos;
+    }
   },
   created() {
     // GET request for JSONPlaceHolder /users
