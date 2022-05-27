@@ -6,14 +6,11 @@
       outlined
       tile
     >
-      <template v-for="(user, id) in users">
-        <p v-bind:key="id">{{ user.name }} {{ user.email }} {{ user['company']['name'] }} {{ user['address']['street'] + " " + user['address']['suite'] }}</p>
+      <template v-if="this.users_response_status === 200">
+        <template v-for="(user, id) in users">
+          <p v-bind:key="id">{{ user.name }} {{ user.email }} {{ user.company.name }} {{ getFullAddress(user) }}</p>
+        </template>
       </template>
-      <!-- <ul>
-        <li v-for="(user, id) in users" v-bind:key="id">
-          {{ user.name }} {{ user.email }}
-        </li>
-      </ul> -->
     </v-card>
   </v-container>
 </template>
@@ -38,11 +35,9 @@ export default {
     }
   },
   methods: { 
-    // getFullAddress() {
-    //   if (this.users_response_status === 200) {
-    //     return this.users['address']['street'] + " " + this.users['address']['suite']
-    //   }
-    // }
+    getFullAddress(user) {
+      return user.address.street+ " " + user.address.suite;
+    }
   },
   created() {
     // GET request for JSONPlaceHolder /users
