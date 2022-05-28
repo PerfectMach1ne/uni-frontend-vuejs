@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <!-- If the response is successful, create user cards -->
-    <template v-if="this.users_response_status === 200">
+    <!-- If the response from /users is successful, create user cards -->
+    <template v-if="!users_loading && !users_error">
+      <!-- Loop through all user objects in users array -->
       <template v-for="(user, id) in users">
-        <!-- <p v-bind:key="id">{{ user.name }} {{ user.email }} {{ user.company.name }} {{ getFullAddress(user) }}</p> -->
-        <user-card v-bind:key="id"/>
-        {{ users_response_status }}
+        <!-- Create a user-card component for each user -->
+        <user-card v-bind:key="id" :userobj="user" :request_loading="users_loading" :request_error="users_error"/>
       </template>
     </template>
   </v-container>
@@ -30,13 +30,8 @@ export default {
     return {
       // Create arrays for resources
       users: [],
-      // Default to Error 400, Bad Request
-      users_response_status: 400
-    }
-  },
-  methods: { 
-    getFullAddress(user) {
-      return user.address.street+ " " + user.address.suite;
+      users_error: false,
+      users_loading: true
     }
   },
   created() {
@@ -45,10 +40,14 @@ export default {
       .then(response => {
         // Write user data into the users array
         this.users = response.data;
-        this.users_response_status = response.status;
       })
       .catch(error => {
-        this.users_response_status = error.status;
+        console.log(error)
+        this.users_error = true;
+      })
+      .finally(() => {
+        console.log("GET Request successful.")
+        this.users_loading = false;
       });
   }
 }
