@@ -1,37 +1,37 @@
 <template>
   <v-container>
-    <v-card
-      class="mx-auto"
-      elevation="7"
-      outlined
-      tile
-    >
-      <template v-if="this.users_response_status === 200">
-        <template v-for="(user, id) in users">
-          <p v-bind:key="id">{{ user.name }} {{ user.email }} {{ user.company.name }} {{ getFullAddress(user) }}</p>
-        </template>
+    <!-- If the response is successful, create user cards -->
+    <template v-if="this.users_response_status === 200">
+      <template v-for="(user, id) in users">
+        <!-- <p v-bind:key="id">{{ user.name }} {{ user.email }} {{ user.company.name }} {{ getFullAddress(user) }}</p> -->
+        <user-card v-bind:key="id"/>
+        {{ users_response_status }}
       </template>
-    </v-card>
+    </template>
   </v-container>
 </template>
 
 <script>
+import UserCard from '@/components/UserCard.vue';
+
 const axios = require('axios').default;
 
 // JSONPlaceHolder URLs
 const url_users = "https://jsonplaceholder.typicode.com/users";
-const url_todos = "https://jsonplaceholder.typicode.com/todos";
 
 export default {
   name: 'HomePage',
+
+  components: {
+    UserCard
+  },
 
   data() {
     return {
       // Create arrays for resources
       users: [],
-      todos: [],
-      users_response_status: 400,
-      todos_response_status: 400
+      // Default to Error 400, Bad Request
+      users_response_status: 400
     }
   },
   methods: { 
@@ -49,16 +49,6 @@ export default {
       })
       .catch(error => {
         this.users_response_status = error.status;
-      });
-    // GET request for JSONPlaceHolder /todos
-    axios.get(url_todos)
-      .then(response => {
-        // Write todo list data into the todos array
-        this.todos = response.data;
-        this.todos_response_status = response.status;
-      })
-      .catch(error => {
-        this.todos_response_status = error.status;
       });
   }
 }
