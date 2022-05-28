@@ -5,6 +5,7 @@
       elevation="7"
       outlined
       tile
+      @click="openUserPage"
     >
       <!-- Ensure the axios request from parent component was successful -->
       <template v-if="!request_loading && !request_error">
@@ -49,9 +50,18 @@ export default {
     getFullAddress(user) {
       return user.address.street+ " " + user.address.suite;
     },
-    test(userlist) {
-      console.log(userlist);
-      return userlist;
+    openUserPage() {
+      // Parse card users URL and send it to the router
+      // this.$router.push('/user-page/' + this.userobj.id);
+      var route = '/user-page/' + this.userobj.id;
+      this.$router.push({
+        path: route,
+        name: 'user-page',
+        params: {
+          userobj: this.userobj,
+          todos: this.todos
+        }
+      });
     }
   },
   created() {
@@ -68,7 +78,6 @@ export default {
       .finally(() => {
         this.todos_loading = false;
       });
-    
-  }
+  },
 }
 </script>

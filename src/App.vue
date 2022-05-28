@@ -1,14 +1,15 @@
 <template>
   <v-app>
     <v-main>
+      <!-- Navigation bar -->
       <v-app-bar
+        class="v-app-bar"
         color="green"
         flat
       >
-        <v-item>
-          <router-link to="/" class="router-link">Home</router-link>
-        </v-item>
+        <router-link to="/" class="router-link">Home</router-link>
       </v-app-bar>
+      <!-- Component matched by router will render here -->
       <router-view/>
     </v-main>
   </v-app>
@@ -27,9 +28,7 @@ export default {
   name: 'App',
 
   data() {
-    return {
-
-    }
+    return { }
   }
 };
 </script>
