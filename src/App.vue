@@ -27,8 +27,11 @@
 export default {
   name: 'App',
 
-  data() {
-    return { }
+  watch: {
+    $route(to, from) {
+      console.log("to", to);
+      console.log("from", from);
+    }
   }
 };
 </script>

@@ -58,6 +58,7 @@ export default {
         path: route,
         name: 'user-page',
         params: {
+          id: this.userobj.id,
           userobj: this.userobj,
           todos: this.todos
         }
@@ -78,6 +79,6 @@ export default {
       .finally(() => {
         this.todos_loading = false;
       });
-  },
+  }
 }
 </script>
