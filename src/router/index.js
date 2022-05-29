@@ -12,6 +12,7 @@ const routes = [
     component: HomePageView
   },
   {
+    // Dynamic route matching
     path: '/user-page/:id',
     name: 'user-page',
     component: UserPageView,

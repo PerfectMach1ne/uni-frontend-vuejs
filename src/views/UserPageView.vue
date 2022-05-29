@@ -1,6 +1,5 @@
 <template>
   <div class="user-page">
-    {{ $route.params.id }}
     <user-page :userobj="userobj" :todos="todos"/>
   </div>
 </template>

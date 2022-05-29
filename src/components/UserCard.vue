@@ -16,7 +16,9 @@
           <p>Address: {{ getFullAddress(userobj) }}</p>
           <p>Company: {{ userobj.company.name }}</p>
         </template>
+        <p v-else-if="todos_error">An error occured while requesting todo list data.</p>
       </template>
+      <p v-else-if="users_error">An error occured while requesting user data.</p>
     </v-card>
   </v-container>
 </template>
@@ -51,8 +53,9 @@ export default {
       return user.address.street+ " " + user.address.suite;
     },
     openUserPage() {
-      // Parse card users URL and send it to the router
-      // this.$router.push('/user-page/' + this.userobj.id);
+      // Parse card user's URL and send it to the router
+      // In params property, id is required for routing dynamic route matching to work.
+      // userobj and todos properties pass the users and todos to UserPageView so that it can create a UserPage component using this data.
       var route = '/user-page/' + this.userobj.id;
       this.$router.push({
         path: route,
@@ -77,6 +80,7 @@ export default {
         console.log(error);
       })
       .finally(() => {
+        console.log("GET Request from " + url_todos + " successful.")
         this.todos_loading = false;
       });
   }

@@ -8,6 +8,8 @@
         <user-card v-bind:key="id" :userobj="user" :request_loading="users_loading" :request_error="users_error"/>
       </template>
     </template>
+    <!-- Display this when fetching users fails -->
+    <p v-else-if="users_error">An error occured while requesting user data.</p>
   </v-container>
 </template>
 
@@ -46,7 +48,7 @@ export default {
         this.users_error = true;
       })
       .finally(() => {
-        console.log("GET Request successful.")
+        console.log("GET Request from " + url_users + " successful.")
         this.users_loading = false;
       });
   }
