@@ -12,6 +12,7 @@
         <!-- If the response from /todos is successful, fill the component with elements -->
         <template v-if="!todos_loading && !todos_error">
           <h3>{{ userobj.name }}</h3>
+          <hr>
           <p>Email: {{ userobj.email }}</p>
           <p>Address: {{ getFullAddress(userobj) }}</p>
           <p>Company: {{ userobj.company.name }}</p>
@@ -82,7 +83,7 @@ export default {
       .finally(() => {
         console.log("GET Request from " + url_todos + " successful.")
         this.todos_loading = false;
-      });
+    });
   }
 }
 </script>

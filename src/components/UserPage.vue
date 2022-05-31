@@ -6,6 +6,7 @@
       tile
     >
       <h3>{{ userobj.name }}</h3>
+      <hr>
       <p>Email: {{ userobj.email }}</p>
       <p>Address: {{ getFullAddress(userobj) }}</p>
       <p>Company: {{ userobj.company.name }}</p>
@@ -22,7 +23,7 @@
       :key="todo.id"
     >
       <v-row no-gutters>
-        <v-checkbox :label="todo.title">{{ todo.title }}</v-checkbox>
+        <v-checkbox :label="todo.title" color="green">{{ todo.title }}</v-checkbox>
       </v-row>
     </v-container>
   </v-container>
@@ -37,12 +38,6 @@ export default {
     'userobj',
     'todos'
   ],
-
-  data() {
-    return {
-      
-    }
-  },
 
   computed: {
     // Filters tasks (todo objects) from todos array based on user id and returns them in a "shortened" array.

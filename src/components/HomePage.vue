@@ -50,7 +50,7 @@ export default {
       .finally(() => {
         console.log("GET Request from " + url_users + " successful.")
         this.users_loading = false;
-      });
+    });
   }
 }
 </script>

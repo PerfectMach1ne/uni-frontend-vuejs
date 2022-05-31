@@ -15,13 +15,6 @@
   </v-app>
 </template>
 
-<style scoped>
-.router-link {
-  font-size: 20px;
-  color: azure;
-}
-</style>
-
 <script>
 
 export default {
@@ -35,3 +28,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.router-link {
+  font-size: 20px;
+  color: azure;
+}
+</style>
