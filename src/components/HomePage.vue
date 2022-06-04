@@ -5,6 +5,8 @@
       <!-- Loop through all user objects in users array -->
       <template v-for="(user, id) in users">
         <!-- Create a user-card component for each user -->
+        <template v-if="!testCondition">
+        </template>
         <user-card v-bind:key="id" :userobj="user" :request_loading="users_loading" :request_error="users_error"/>
       </template>
     </template>
@@ -36,12 +38,25 @@ export default {
       users_loading: true
     }
   },
+  computed: {
+    testCondition() {
+      return this.$store.getters.getUsersStatus;
+    }
+  },
+  methods: {
+    getUsers() {
+      return this.$store.getters.getUsers;
+    }
+  },
   created() {
     // GET request for JSONPlaceHolder /users
     axios.get(url_users)
       .then(response => {
         // Write user data into the users array
         this.users = response.data;
+        console.log("created()", this.users);
+        this.$store.dispatch('fetchUsers');
+        console.log("Vuex", this.users);
       })
       .catch(error => {
         console.log(error)
