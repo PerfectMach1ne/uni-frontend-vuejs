@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+![alt text][screenshot]
+
+[screenshot]: https://celest1nee.files.wordpress.com/2022/09/image-3.png?w=1024 "App screenshot"
